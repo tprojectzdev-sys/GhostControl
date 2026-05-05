@@ -1,0 +1,46 @@
+# Axon Remote — PC whitelist
+#
+# Edit this file to control what your phone can launch on this PC.
+# Aliases (the keys under `apps:` and `groups:`) are the only thing the relay
+# and the phone can see. The actual paths never leave the PC.
+#
+# Reload is automatic when this file is saved; no agent restart needed.
+
+apps:
+  # short form — alias: path
+  notepad: "C:\\Windows\\System32\\notepad.exe"
+  calculator: "C:\\Windows\\System32\\calc.exe"
+
+  # long form — alias: { path, args }
+  chrome:
+    path: "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+    args: []
+
+  vscode:
+    path: "C:\\Users\\me\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
+    args: []
+
+  spotify:
+    path: "C:\\Users\\me\\AppData\\Roaming\\Spotify\\Spotify.exe"
+    args: []
+
+groups:
+  # Multi-step actions. Cannot include power.* or nested groups.
+  work_morning:
+    - { cmd: app.open, args: { target: vscode } }
+    - { cmd: url.open, args: { url: "https://github.com" } }
+    - { cmd: app.open, args: { target: spotify } }
+
+  media_mode:
+    - { cmd: app.open, args: { target: spotify } }
+    - { cmd: url.open, args: { url: "https://youtube.com" } }
+
+url_policy:
+  # "allow_any_https" trusts any https:// URL (recommended for personal use).
+  # "allowlist" only allows hostnames matching the patterns below (fnmatch).
+  mode: allow_any_https
+  allowlist:
+    - "youtube.com"
+    - "*.youtube.com"
+    - "github.com"
+    - "*.notion.so"
