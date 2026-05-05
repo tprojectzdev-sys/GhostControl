@@ -35,10 +35,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, PlainTextResponse
 from pydantic import ValidationError
 
-from . import audit
-from .config import Settings, load_settings
-from .ratelimit import RateLimiter
-from .schemas import (
+import audit
+from config import Settings, load_settings
+from ratelimit import RateLimiter
+from schemas import (
     BRIDGE_COMMANDS,
     MAX_BODY_BYTES,
     AgentHello,
@@ -46,7 +46,7 @@ from .schemas import (
     CommandAck,
     StatusReport,
 )
-from .ws_manager import AgentConn, WSManager
+from ws_manager import AgentConn, WSManager
 
 
 log = logging.getLogger("axon.relay")
